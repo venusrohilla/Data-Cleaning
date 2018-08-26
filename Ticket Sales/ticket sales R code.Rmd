@@ -8,7 +8,7 @@ sales <- read.csv(url_sales, stringsAsFactors=F)
 ```{r}
 dim(sales)
 ```
-[put sales dim image]
+![put sales dim image](https://github.com/venusrohilla/Data-Cleaning/blob/master/Ticket%20Sales/plots/sales%20dim.PNG)
 
 the number of rows are 5000 and no. of variables are 46
 
