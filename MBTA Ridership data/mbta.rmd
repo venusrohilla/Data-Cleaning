@@ -1,0 +1,76 @@
+```{r}
+#MBTA Ridership Data
+#upload mbta2 data.xlsx 
+library(readxl)
+mbta <-read_xlsx("mbta(11).xlsx",skip=1) 
+#examining the data
+str(mbta)
+#[put str mbta part1,2]
+summary(mbta)
+#[put summary mbta part 1,2]
+#Removing unnecessry rows and columns
+#Some of these rows are from analysis mixed in with the data in the excel sheet
+#This is super common in excel but makes the data messy and less usable
+#The first column is just the row number
+## Remove rows 1 bcoz it contains many na values , 7 row bcoz it has negative values, and 11row which contains total  of mbta: mbta2
+keep <- !(mbta$mode %in% c('All Modes by Qtr', 'Pct Chg / Yr', 'TOTAL'))
+keep
+mbta2 <- mbta[keep,]
+glimpse(mbta2)
+#[put glimpse mbta part1,2]
+# we see now we have only 8 oiously we hab 11 obsbservations.but prev
+# Remove the first column of mbta2: mbta3
+mbta3 <- mbta2[,-1]
+glimpse(mbta3)
+#Observations are stored in columns
+#This data is pretty much stored backwards
+#The observation of rider count is being made each month for differnt transit types
+#The month is the observation unique key and should be a column value
+#The mode of transportation could be a variable and be in one column or it could be spread and have one column per type
+## mbta3 is pre-loaded
+head(mbta3)
+View(mbta3)
+# Gather columns of mbta3: mbta4
+mbta4 <- gather(mbta3, month, thou_riders, -mode)
+# View the head of mbta4
+head(mbta4)
+#[put head mbta4]
+# Coerce thou_riders to numeric
+mbta4$thou_riders <- as.numeric(mbta4$thou_riders)
+head(mbta4)
+#[put mbta 4 part2]
+#earlier we had thou_riders as chr type but now they are numeric 
+#Variables are stored in both rows and columns
+#Here they want to spread all the modes of transportaion into separate columns
+#I actually like it in a column for these reasons.
+#I think of the variables as month, trasportation mode, and rider count.
+#If doing a group by and summarize it needs to be in a column to group by type
+#Also ggplot will require it in a column
+#But The exercise is to spread it out. Though they make a chart and have to re-melt it later! : )
+#But its not a big deal. Its easy to gather or spread this info based on whats needed for analysis.
+## tidyr is pre-loaded
+## tidyr is pre-loaded
+library(tidyr)
+## Spread the contents of mbta4: mbta5
+mbta5 <- spread(mbta4, mode, thou_riders)
+# View the head of mbta5
+head(mbta5)
+#[put head mbta5]
+#Separating columns
+# Split month column into month and year: mbta6
+mbta6 <- separate(mbta5, month, c('year', 'month'))
+# View the head of mbta6
+head(mbta6)
+# we see that in the boad col 40 is an outlier
+#.plotting a histogram gives a clear view to this.
+hist(mbta6$Boat)
+#[put mbta boat hist 1]
+#Dealing with entry error
+# Find the row number of the incorrect value: i
+i <- which(mbta6$Boat == 40)
+# Replace the incorrect value with 4
+mbta6$Boat[i] <- 4
+# Generate a histogram of Boat column
+hist(mbta6$Boat)
+#[put mbta boat hist2]
+```
