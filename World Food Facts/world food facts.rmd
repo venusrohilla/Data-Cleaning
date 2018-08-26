@@ -1,65 +1,109 @@
+# World Food Facts
+
+#### Importing the data
+#### Load data.table
 ```{r}
-#World Food Facts
-#Importing the data
-## Load data.table
 library(data.table)
-# Import food.csv: food
+```
+#### Import food.csv: 
+```{r}
 url_food <- 'http://s3.amazonaws.com/assets.datacamp.com/production/course_1294/datasets/food.csv'
-food <- fread(url_food)
-View(food)
-# Convert food to a data frame
+food <- read(url_food)
+```
+#### Convert food to a data frame
+```{r}
 food <- data.frame(food)
-#Examining the data
-# View a glimpse of food
+```
+Examining the data
+#### View a glimpse of food
+```{r}
 glimpse(food)
-#[put glimpse part1,2,3]
-# View column names of food
+```
+![put glimpse part1,2,3](https://github.com/venusrohilla/Data-Cleaning/blob/master/Ticket%20Sales/plots/glimpse%20foodpart1.PNG)
+![put](https://github.com/venusrohilla/Data-Cleaning/blob/master/Ticket%20Sales/plots/glimpse%20food%20part2.PNG)
+![put](https://github.com/venusrohilla/Data-Cleaning/blob/master/Ticket%20Sales/plots/glimpse%20food%20part3.PNG)
+
+View column names of food
+
+```{r}
 names(food)
-#[put foodnames1,2]
-#we wnat t limit our output
-# View structure of food
+```
+![put foodnames1,2](https://github.com/venusrohilla/Data-Cleaning/blob/master/Ticket%20Sales/plots/food%20names%201.PNG)
+![put](https://github.com/venusrohilla/Data-Cleaning/blob/master/Ticket%20Sales/plots/food%20names2.PNG)
+
+We want to limit our output.View structure of food.
+```{r}
 str(food[,1:10])
-#[put str food]
-#Removing dupicate info
-# Define vector of duplicate cols (don't change)
+```
+![put str food](https://github.com/venusrohilla/Data-Cleaning/blob/master/Ticket%20Sales/plots/str%20food.PNG)
+
+#### Removing dupicate info
+
+Define vector of duplicate cols (don't change)
+```{r}
 duplicates <- c(4, 6, 11, 13, 15, 17, 18, 20, 22, 
                 24, 25, 28, 32, 34, 36, 38, 40, 
                 44, 46, 48, 51, 54, 65, 158)
-# Remove duplicates from food: food2
+ ```               
+                
+Remove duplicates from food: 
+```{r}
 food2 <- food[,-duplicates]
-#Removing useless info
-# Define useless vector (don't change)
-useless <- c(1, 2, 3, 32:41)
-# Remove useless columns from food2: food3
-food3 <- food2[,-useless]
-#Finding columns
-# Create vector of column indices: nutrition
-nutrition <- str_detect(names(food3),"100g")
-# View a summary of nutrition columns
-summary(food3[,nutrition])
-#[put summary food ,2nutri ]
-# as we can see there are lot of missing values
-#Replacing missing values
-# Find indices of sugar NA values: missing
-missing <- is.na(food3$sugars_100g)
-# Replace NA values with 0
-food3$sugars_100g[missing] <- 0
-# Create first histogram
-hist(food3$sugars_100g, breaks=100)
-#[put food sugar hist]
-# Create food4
-food4 <- food3[food3$sugars_100g != 0, ]
-# Create second histogram
-hist(food4$sugars_100g, breaks=100)
-#[put food hist 4]
-
-#Dealing with messy data
-#This exercise is attempting to estimate the number of food items in plastic packaging
-#going back to the original food dataframe here
-#packagin_tags column was removed in an earlier exercise. that maybe a mistake
-# Find entries containing "plasti": plastic
-plastic <- str_detect(food$packaging_tags,"plasti")
-# Print the sum of plastic
-sum(plastic)
-#[540]
 ```
+### Removing useless info
+Define useless vector (don't change)
+```{r}
+useless <- c(1, 2, 3, 32:41)
+```
+Remove useless columns from food2: 
+```{r}
+food3 <- food2[,-useless]
+```
+#### Finding columns
+ Create vector of column indices: nutrition:
+ ```{r}
+nutrition <- str_detect(names(food3),"100g")
+```
+View a summary of nutrition columns
+```{r}
+summary(food3[,nutrition])
+```
+![put summary food ](https://github.com/venusrohilla/Data-Cleaning/blob/master/Ticket%20Sales/plots/summary%20food%203%20nutri.PNG)
+![put](https://github.com/venusrohilla/Data-Cleaning/blob/master/Ticket%20Sales/plots/summary%20food%203%20nutri2.PNG)
+
+As we can see there are lot of missing values. So Replacing missing values:
+
+ Find indices of sugar NA values:
+ ```{r}
+missing <- is.na(food3$sugars_100g)
+```
+Replace NA values with 0
+```{r}
+food3$sugars_100g[missing] <- 0
+```
+Create first histogram
+```{r}
+hist(food3$sugars_100g, breaks=100)
+```
+![put food sugar hist](https://github.com/venusrohilla/Data-Cleaning/blob/master/Ticket%20Sales/plots/food%20sugar%20hist.png)
+
+Create food4
+```{r}
+food4 <- food3[food3$sugars_100g != 0, ]
+```
+Create second histogram:
+```{r}
+hist(food4$sugars_100g, breaks=100)
+```
+![put food hist 4](https://github.com/venusrohilla/Data-Cleaning/blob/master/Ticket%20Sales/plots/food%20hist%204.png)
+
+### Dealing with messy data
+This exercise is attempting to estimate the number of food items in plastic packaging.
+Going back to the original food dataframe here.packagin_tags column was removed in an earlier exercise. 
+
+Find entries containing "plastic": 
+```{r}
+plastic <- str_detect(food$packaging_tags,"plasti")
+sum(plastic)
+```
+[1] 540
