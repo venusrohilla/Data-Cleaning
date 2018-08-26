@@ -1,1 +1,24 @@
+### World Food Facts Data Dictionary.
 
+###### The world food facts dataset contains the following information:
+1. The url from where the information about the particular type of food is collected.
+2. The creator of the information or the provider of the information.
+3. Creation date and time of the food product.
+4. Last modification in the information about the food product, its  date and time
+5. Product name and its generic name.
+6. Quantity of the food product.
+7. The brands of the food product
+8. Its packaging type like plastic, carton or foil and the packaging tags on it.
+9. Category like is it chocolate ,nuts or yogurt.
+10. Categories tags such as fresh meat or prepared meat,alcoholic or non alcoholic beverages or plant based food.
+11. The origin of the raw food product.
+12. Manufacturing places of the food product.
+13. Purchase places of the food product.
+14. Stores where the product is sold.
+15. The additives present in the  food product .
+16. Traces in the food product like mike  traces or nuts traces or fruits.
+17. `pnngroups` like sugary snaks,fruits and vegetables or dairy products.
+18. The url of the image of the food product.
+19. Energy content and fat content of the food product.
+20. Different types acid contents in the food product.
+21. Vitamins and minerals present in the food product.
