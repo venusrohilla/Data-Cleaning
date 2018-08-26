@@ -23,7 +23,7 @@
 21. age yr: the age of the person purchasing ticket  
 22. incom: the income of the person purchasing ticket 
 23. educantio level: whether high school or graduate.
-24.adults_hh num: no. of adults present, purchasing ticket 
+24. adults_hh num: no. of adults present, purchasing ticket 
 25. chil_present: no of child present with the adults.
 26. married_ind : whether person is married or not purchasing  the ticket 
 27. occpn_val :  occupation of person purchasing ticket 
