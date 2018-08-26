@@ -1,1 +1,29 @@
-Ticket Sales Data set
+#Ticket Sales Dataset
+#### The following Information is given in the Ticket Sales dataset:
+1. event id: apart from the name of the event the id of the evnt is given ,so as to recognise which event was held .
+2. event name: the name of the event.
+3. event display name : as what name was displayed for the event.
+4. ticket text: specifying as to what specifically the ticket was used for example ,the validity of the ticket or the concession on the ticket,or the timings of the event.
+5. address of the event.
+6. major _cat_name : telling the category of the event e.g was it a concert or miscellaneous( others)
+7. minor cat name: telling what exacyly the event was about like for concert was it rock concert or pop concert or both .for misc  is it for parking or dinner package or special vouchers.
+8. ticket purchase quantity:the no. of tickets purchased
+9. trans face val amut: amont of ticket
+10. delivery type : how the ticket was delivered was it eticket or was it mailed  or purchased from the ticket window.
+11. event date and time: the time and date of the event.
+12.event date :only the date of the event.
+13. presale date : if the tickect was sold before the happenig of the event.
+14. the print date of the ticket : when was ticket printed.
+15. venue city: the name of the city where the event is happening
+16. venue state: the name of the state where the event is happening.
+17. venue postal cd_sgmt: the postal pin of the state
+18. sales platform: was it online or offline
+19. web session cookies:during the issue of the ticket the web session cookie.
+20. gndr cd: the gender of the person
+21. age yr: the age of the person .
+22.incom: the income of the person
+23. educantio level: whether high school or graduate.
+24.adults_hh num: no. of adults 
+25. chil_present: no of child present
+26. married_ind : whether married or not
+27. occpn_val : their occupation
