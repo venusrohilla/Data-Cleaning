@@ -1,0 +1,55 @@
+```{r}
+getwd()
+#Loading the sales data from the link 
+url_sales<-'http://s3.amazonaws.com/assets.datacamp.com/production/course_1294/datasets/sales.csv'
+#Reading the data into sales
+sales <- read.csv(url_sales, stringsAsFactors=F)
+dim(sales)
+
+#the number of rows are 5000 and no. of variables are 46
+
+#for seeing the first six  starting rows and columns 
+head(sales)
+summary(sales)
+
+# for finding the columns name
+names(sales)
+#[put names image]
+#there are 46 columns with the above names
+#the str function gives a good understanding of what our data type is .ie is it character ,or integer
+str(sales)
+#[put str part1,2 image]
+library(dplyr)
+#the glimpse function is similar to str function but gives us more clear  view the data type]
+glimpse(sales)
+#[put glimpse part1,2]
+#as we can see the difference, in the out put of str the age_yr had NA vales while in the output of glimpse func we can see the null 
+#avlue as well as the numeric values also
+# removing the first col of sales
+sales2<-sales[,-1]
+str(sales2)
+ncol(sales2)
+#[put ncol sales2 image]
+# removing not much required information
+#removing first 4 columns or the last 15
+keep<- seq(5,ncol(sales2)-15,1)
+keep
+#[put keep sales2 image]
+# Subset sales2 using keep: sales3
+sales3<-sales2[,keep]
+glimpse(sales3)
+#[put glimpse sales 3]
+#as we can see the first 4 col and the last 15 col are reemoved
+#separating columns
+# Split event_date_time: sales4
+library(tidyr)
+library(stringr)
+head(sales3$event_date_time)
+#[put sales3 event date time]
+# we can see the date and time are writen together so we need to separate it
+sales4 <- separate(sales3, event_date_time, c('event_dt', 'event_time'), sep = " ")
+## check new columns
+col <- str_detect(names(sales4),'event')
+glimpse(sales4[,col])
+#[put separeted date time event]
+
