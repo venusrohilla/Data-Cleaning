@@ -1,55 +1,99 @@
 ```{r}
 getwd()
-#Loading the sales data from the link 
+Loading the sales data from the link 
 url_sales<-'http://s3.amazonaws.com/assets.datacamp.com/production/course_1294/datasets/sales.csv'
-#Reading the data into sales
+Reading the data into sales
 sales <- read.csv(url_sales, stringsAsFactors=F)
+```
+```{r}
 dim(sales)
+```
+[put sales dim image]
 
-#the number of rows are 5000 and no. of variables are 46
+the number of rows are 5000 and no. of variables are 46
 
-#for seeing the first six  starting rows and columns 
+for seeing the first six  starting rows and columns 
+
+```{r}
 head(sales)
 summary(sales)
+```
+![put image](https://github.com/venusrohilla/Data-Cleaning/blob/master/Ticket%20Sales/plots/sales%20summary%20part1.PNG)
 
-# for finding the columns name
+![put image](https://github.com/venusrohilla/Data-Cleaning/blob/master/Ticket%20Sales/plots/sales%20summary%20part2.PNG)
+
+#### for finding the columns name
+
+```{r}
 names(sales)
-#[put names image]
-#there are 46 columns with the above names
-#the str function gives a good understanding of what our data type is .ie is it character ,or integer
+```
+![put names image](https://github.com/venusrohilla/Data-Cleaning/blob/master/Ticket%20Sales/plots/names%20image.PNG)
+
+there are 46 columns with the above names
+the str function gives a good understanding of what our data type is .ie is it character ,or integer
+
+```{r}
 str(sales)
-#[put str part1,2 image]
+```
+![put str part1,2 image](https://github.com/venusrohilla/Data-Cleaning/blob/master/Ticket%20Sales/plots/str%20part1.PNG)
+
+![put image](https://github.com/venusrohilla/Data-Cleaning/blob/master/Ticket%20Sales/plots/str%20part2.PNG)
+
+```{r}
 library(dplyr)
-#the glimpse function is similar to str function but gives us more clear  view the data type]
 glimpse(sales)
-#[put glimpse part1,2]
-#as we can see the difference, in the out put of str the age_yr had NA vales while in the output of glimpse func we can see the null 
-#avlue as well as the numeric values also
-# removing the first col of sales
+```
+#### the glimpse function is similar to str function but gives us more clear  view the data type.
+
+![put glimpse part1,2](https://github.com/venusrohilla/Data-Cleaning/blob/master/Ticket%20Sales/plots/glimpse%20part1.PNG)
+
+![put](https://github.com/venusrohilla/Data-Cleaning/blob/master/Ticket%20Sales/plots/glimpse%20part2.PNG)
+
+as we can see the difference, in the out put of str the age_yr had NA vales while in the output of glimpse func we can see the null 
+value as well as the numeric values also.
+
+#### removing the first col of sales
+```{r}
 sales2<-sales[,-1]
 str(sales2)
 ncol(sales2)
-#[put ncol sales2 image]
-# removing not much required information
-#removing first 4 columns or the last 15
+```
+![put ncol sales2 image](https://github.com/venusrohilla/Data-Cleaning/blob/master/Ticket%20Sales/plots/ncol%20sales2.PNG)
+
+#### removing not much required information
+removing first 4 columns or the last 15
+
+```{r}
 keep<- seq(5,ncol(sales2)-15,1)
 keep
-#[put keep sales2 image]
-# Subset sales2 using keep: sales3
+```
+![put keep sales2 image](https://github.com/venusrohilla/Data-Cleaning/blob/master/Ticket%20Sales/plots/keep%20sales2.PNG)
+
+#### Subset sales2 using keep: sales3
+```{r}
 sales3<-sales2[,keep]
 glimpse(sales3)
-#[put glimpse sales 3]
-#as we can see the first 4 col and the last 15 col are reemoved
-#separating columns
-# Split event_date_time: sales4
+```
+![put glimpsesales 3](https://github.com/venusrohilla/Data-Cleaning/blob/master/Ticket%20Sales/plots/glimpse%20sales%203.PNG)
+
+as we can see the first 4 col and the last 15 col are reemoved
+
+#### Split event_date_time: sales4
+```{r}
 library(tidyr)
 library(stringr)
 head(sales3$event_date_time)
-#[put sales3 event date time]
-# we can see the date and time are writen together so we need to separate it
+```
+![put sales3 event date time](https://github.com/venusrohilla/Data-Cleaning/blob/master/Ticket%20Sales/plots/sales3%20event%20date%20time.PNG)
+we can see the date and time are writen together so we need to separate it.
+
+```{r}
 sales4 <- separate(sales3, event_date_time, c('event_dt', 'event_time'), sep = " ")
-## check new columns
+```
+#### check new columns
+```{r}
 col <- str_detect(names(sales4),'event')
 glimpse(sales4[,col])
-#[put separeted date time event]
+```
+![putsepareted date time event](https://github.com/venusrohilla/Data-Cleaning/blob/master/Ticket%20Sales/plots/separeted%20date%20time%20event.PNG)
 
