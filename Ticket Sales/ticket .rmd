@@ -18,12 +18,12 @@
 16. venue state: the name of the state where the event is happening.
 17. venue postal cd_sgmt: the postal pin of the state
 18. sales platform: was it online or offline
-19. web session cookies:during the issue of the ticket the web session cookie.
-20. gndr cd: the gender of the person
-21. age yr: the age of the person .
-22.incom: the income of the person
+19. web session cookies:during the issue of the ticket the web session cookie
+20. gndr cd: the gender of the person purchasing ticket 
+21. age yr: the age of the person purchasing ticket  
+22. incom: the income of the person purchasing ticket 
 23. educantio level: whether high school or graduate.
-24.adults_hh num: no. of adults 
-25. chil_present: no of child present
-26. married_ind : whether married or not
-27. occpn_val : their occupation
+24.adults_hh num: no. of adults present, purchasing ticket 
+25. chil_present: no of child present with the adults.
+26. married_ind : whether person is married or not purchasing  the ticket 
+27. occpn_val :  occupation of person purchasing ticket 
